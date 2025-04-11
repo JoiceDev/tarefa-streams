@@ -1,9 +1,18 @@
-mport java.util.ArrayList;
+package tarefaStreams;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class FiltroPessoas {
+    
+    // Método extraído para facilitar o teste
+    public static List<Pessoa> filtrarMulheres(List<Pessoa> pessoas) {
+        return pessoas.stream()
+                .filter(p -> p.getSexo().equalsIgnoreCase("F"))
+                .collect(Collectors.toList());
+    }
+    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite uma lista de pessoas no formato nome,sexo;nome,sexo;... (exemplo: Maria,F;João,M;Ana,F):");
@@ -27,10 +36,8 @@ public class FiltroPessoas {
             }
         }
         
-        // Usar lambda para filtrar apenas as mulheres (sexo "F" ou "f")
-        List<Pessoa> mulheres = listaPessoas.stream()
-                .filter(p -> p.getSexo().equalsIgnoreCase("F"))
-                .collect(Collectors.toList());
+        // Chamar o método extraído em vez de usar o stream diretamente aqui
+        List<Pessoa> mulheres = filtrarMulheres(listaPessoas);
         
         // Imprimir o resultado
         System.out.println("\nLista de mulheres:");
